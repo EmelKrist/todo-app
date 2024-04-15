@@ -1,0 +1,10 @@
+spring.application.name=todo-app
+
+# Data source configuration
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+
+# JPA configuration
+spring.jpa.show-sql=true
