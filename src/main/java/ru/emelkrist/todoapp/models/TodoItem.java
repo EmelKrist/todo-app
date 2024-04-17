@@ -19,7 +19,7 @@ public class TodoItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @NotBlank(message = "Описание обязательно!")
+    @NotBlank(message = "Поле с описанием обязательно для заполнения!")
     @Column(name = "description")
     private String description;
     @Column(name = "isComplete")
