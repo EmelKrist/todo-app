@@ -15,6 +15,7 @@
         <!-- заголовки таблицы -->
         <thead>
         <tr>
+            <th>Actions</th>
             <th>Id</th>
             <th>Description</th>
             <th>Is complete</th>
@@ -26,6 +27,14 @@
         <tbody>
         <!-- выводим данные, полученного в модели список всех дел -->
         <tr th:each="item : ${todoItems}" th:class="${item.isComplete} ? 'alert alert-success' : 'alert alert-warning'">
+            <td>
+                <div class="btn btn-group-sm" role="group">
+                    <!-- удаление дела -->
+                    <form th:method="POST" th:action="@{/todos/delete/{id} (id=${item.getId()})}">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form>
+                </div>
+            </td>
             <td th:text="${item.id}"></td>
             <td th:text="${item.description}"></td>
             <td>
@@ -39,6 +48,7 @@
         </tbody>
     </table>
 
+    <!-- добавление дела -->
     <p><a class="btn btn-outline-success" href="/todos/new">
         <i class="bi bi-plus-square-fill"></i> Create a Todo</a>
     </p>

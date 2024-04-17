@@ -12,7 +12,7 @@ import java.util.List;
  * Класс - сервис для работы с делами.
  */
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class TodoItemService {
 
     private TodoItemRepository todoItemRepository;
@@ -27,6 +27,7 @@ public class TodoItemService {
      *
      * @return список дел
      */
+    @Transactional(readOnly = true)
     public List<TodoItem> getAll() {
         return todoItemRepository.findAll();
     }
@@ -36,8 +37,18 @@ public class TodoItemService {
      *
      * @param todoItem новое дело с данными из формы
      */
-    @Transactional
     public void save(TodoItem todoItem) {
         todoItemRepository.save(todoItem);
     }
+
+
+    /**
+     * Метод для удаления из БД дела по его id.
+     *
+     * @param id идентификатор дела
+     */
+    public void delete(long id) {
+        todoItemRepository.deleteById(id);
+    }
+
 }

@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.emelkrist.todoapp.models.TodoItem;
 import ru.emelkrist.todoapp.services.TodoItemService;
 
@@ -58,5 +55,15 @@ public class TodoItemController {
         return "redirect:/";
     }
 
-
+    /**
+     * Метод для удаления дела.
+     *
+     * @param todoId идентификатор удаляемого дела
+     * @return редирект на главную страницу
+     */
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") long todoId) {
+        todoItemService.delete(todoId);
+        return "redirect:/";
+    }
 }
