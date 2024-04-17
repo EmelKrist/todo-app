@@ -6,7 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.emelkrist.todoapp.models.TodoItem;
 import ru.emelkrist.todoapp.repositories.TodoItemRepository;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Класс - сервис для работы с делами.
@@ -15,12 +17,8 @@ import java.util.List;
 @Transactional
 public class TodoItemService {
 
-    private TodoItemRepository todoItemRepository;
-
     @Autowired
-    public TodoItemService(TodoItemRepository todoItemRepository) {
-        this.todoItemRepository = todoItemRepository;
-    }
+    private TodoItemRepository todoItemRepository;
 
     /**
      * Метод для получения писка всех дел.
@@ -38,9 +36,12 @@ public class TodoItemService {
      * @param todoItem новое дело с данными из формы
      */
     public void save(TodoItem todoItem) {
+        if (todoItem.getId() == null) {
+            todoItem.setCreatedAt(Instant.now());
+        }
+        todoItem.setUpdatedAt(Instant.now());
         todoItemRepository.save(todoItem);
     }
-
 
     /**
      * Метод для удаления из БД дела по его id.
@@ -49,6 +50,17 @@ public class TodoItemService {
      */
     public void delete(long id) {
         todoItemRepository.deleteById(id);
+    }
+
+    /**
+     * Метод для получения дела из БД по id.
+     *
+     * @param id идентификатор дела
+     * @return дело (опционально)
+     */
+    @Transactional(readOnly = true)
+    public Optional<TodoItem> getOne(long id) {
+        return todoItemRepository.findById(id);
     }
 
 }

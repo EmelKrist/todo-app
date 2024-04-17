@@ -2,13 +2,10 @@ package ru.emelkrist.todoapp.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import java.time.Instant;
 
-import java.sql.Timestamp;
-
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "todo_items")
 /**
@@ -23,11 +20,11 @@ public class TodoItem {
     @Column(name = "description")
     private String description;
     @Column(name = "isComplete")
-    private boolean isComplete;
+    private Boolean isComplete;
     @Column(name = "createdAt")
-    private Timestamp createdAt;
+    private Instant createdAt;
     @Column(name = "updatedAt")
-    private Timestamp updatedAt;
+    private Instant updatedAt;
 
     @Override
     public String toString() {
