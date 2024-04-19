@@ -11,54 +11,44 @@
 <body>
 
 <div class="container">
-    <div class="row mt-5">
-        <div class="col-2">
-            <!-- кнопка возращения на главную страницу -->
-            <p><a class="btn btn-outline-success" href="/">
-                <i class="bi bi-arrow-left-square-fill"></i>Back</a>
-            </p>
-        </div>
-        <div class="col-6">
-            <h2>Edit the todo item</h2>
-            <form class="row g-3"
-                  action="#" th:action="@{/todos/edit/{id} (id=${todoItem.id})}"
-                  th:object="${todoItem}"
-                  method="POST">
-                <div class="form-group">
-                    <!-- поле для описания -->
-                    <div class="col-6">
-                        <input type="text"
-                               class="form-control"
-                               th:field="*{description}"
-                               placeholder="Description"
-                               style="margin-bottom: 10px"
-                        >
-                    </div>
-                    <!-- чекбокс, который считывает и меняет значение поля isComplete -->
-                    <div class="col-6 form-check">
-                        <input class="form-check-input"
-                               type="checkbox"
-                               id="inputIsComplete"
-                               th:field="*{isComplete}"
-                               th:checked="${todoItem.isComplete}">
-                        <label style="margin-bottom: 15px" for="inputIsComplete"
-                               class="form-check-label">Completed?</label>
-                    </div>
-                    <!-- для возврата из представления времени создания и изменения -->
-                    <input type="hidden" th:field="*{createdAt}"/>
-                    <input type="hidden" th:field="*{updatedAt}"/>
-                    <!-- предупреждение об ошибке ввода данных (из binding result) -->
-                    <div class="alert alert-danger alert-dismissible fade show"
-                         th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
-                    <!-- кнопка отправки формы для обновления -->
-                    <button type="submit" class="btn btn-outline-success">
-                        <i class="bi bi-plus-square-fill"></i>Update
-                    </button>
+    <h3>Edit the todo item</h3>
+    <form class="row g-3"
+          action="#" th:action="@{/todos/edit/{id} (id=${todoItem.id})}"
+          th:object="${todoItem}"
+          method="POST">
+        <div class="form-group">
+            <!-- поле для описания -->
+            <div class="col-12">
+                <input type="text"
+                       class="form-control"
+                       th:field="*{description}"
+                       placeholder="Description"
+                       style="margin-bottom: 10px"
+                >
+            </div>
+            <!-- чекбокс, который считывает и меняет значение поля isComplete -->
+            <div class="col-6 form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       id="inputIsComplete"
+                       th:field="*{isComplete}"
+                       th:checked="${todoItem.isComplete}">
+                <label style="margin-bottom: 15px" for="inputIsComplete"
+                       class="form-check-label">Completed?</label>
+            </div>
+            <!-- для возврата из представления времени создания и изменения -->
+            <input type="hidden" th:field="*{createdAt}"/>
+            <input type="hidden" th:field="*{updatedAt}"/>
+            <!-- предупреждение об ошибке ввода данных (из binding result) -->
+            <div class="alert alert-danger alert-dismissible fade show"
+                 th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+            <!-- кнопка отправки формы для обновления -->
+            <button type="submit" class="btn btn-outline-success">
+                <i class="bi bi-plus-square-fill"></i>Update
+            </button>
 
-                </div>
-            </form>
         </div>
-    </div>
+    </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
